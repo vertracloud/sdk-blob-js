@@ -39,6 +39,8 @@ export type {
 	RESTPatchAPIBlobObjectResponse,
 	RESTPatchAPIBlobObjectsBody,
 	RESTPatchAPIBlobObjectsResponse,
+	RESTPatchAPIBlobDomainBody,
+	RESTPatchAPIBlobDomainResponse,
 	RESTPostAPIBlobDomainBody,
 	RESTPostAPIBlobDomainResponse,
 	RESTPostAPIBlobDomainVerifyResponse,

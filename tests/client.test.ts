@@ -116,11 +116,12 @@ describe("envelope, auth and errors", () => {
 		await client.rules.delete("a/");
 		await client.domains.list();
 		await client.domains.add("cdn.example.com");
+		await client.domains.update("1", { web_content: true });
 		await client.domains.verify("1");
 		await client.domains.remove("1");
 		await client.listUploads();
 		await client.abortUpload("1");
-		assert.equal(calls.length, 24);
+		assert.equal(calls.length, 25);
 		for (const call of calls) assert.equal(call.url.searchParams.get("workspace_id"), "ws_1", `${call.method} ${call.url.pathname}`);
 	});
 });
@@ -300,13 +301,15 @@ describe("account, shares, rules and domains", () => {
 	it("manages custom domains", async () => {
 		const { client, calls } = makeClient(() => ok({}));
 		await client.domains.list();
-		await client.domains.add("cdn.example.com", { prefix: "img/" });
+		await client.domains.add("cdn.example.com", { prefix: "img/", web_content: true });
+		await client.domains.update("4", { web_content: false });
 		await client.domains.verify("4");
 		await client.domains.remove("4");
 		assert.deepEqual(
 			calls.map((c) => `${c.method} ${c.url.pathname}`),
-			["GET /v1/domains", "POST /v1/domains", "POST /v1/domains/4/verify", "DELETE /v1/domains/4"],
+			["GET /v1/domains", "POST /v1/domains", "PATCH /v1/domains/4", "POST /v1/domains/4/verify", "DELETE /v1/domains/4"],
 		);
-		assert.deepEqual(calls[1].json, { hostname: "cdn.example.com", prefix: "img/" });
+		assert.deepEqual(calls[1].json, { hostname: "cdn.example.com", prefix: "img/", web_content: true });
+		assert.deepEqual(calls[2].json, { web_content: false });
 	});
 });

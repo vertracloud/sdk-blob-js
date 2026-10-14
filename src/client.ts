@@ -17,6 +17,7 @@ import type {
 	RESTDeleteAPIBlobObjectsBody,
 	RESTGetAPIBlobObjectDownloadQuery,
 	RESTGetAPIBlobObjectsQuery,
+	RESTPatchAPIBlobDomainBody,
 	RESTPatchAPIBlobObjectBody,
 	RESTPatchAPIBlobObjectsBody,
 	RESTPostAPIBlobDomainBody,
@@ -556,10 +557,12 @@ export class BlobClient {
 
 	readonly domains = {
 		list: (options: RequestOptions = {}): Promise<APIBlobCustomDomain[]> => this.api("GET", "/domains", options),
-		add: (hostname: string, options: RequestOptions & { prefix?: string } = {}): Promise<APIBlobCustomDomain> => {
-			const { signal, timeout, prefix } = options;
-			return this.api("POST", "/domains", { json: { hostname, ...(prefix ? { prefix } : {}) } satisfies RESTPostAPIBlobDomainBody, signal, timeout });
+		add: (hostname: string, options: RequestOptions & { prefix?: string; web_content?: boolean } = {}): Promise<APIBlobCustomDomain> => {
+			const { signal, timeout, prefix, web_content } = options;
+			return this.api("POST", "/domains", { json: { hostname, ...(prefix ? { prefix } : {}), ...(web_content === undefined ? {} : { web_content }) } satisfies RESTPostAPIBlobDomainBody, signal, timeout });
 		},
+		update: (domainId: SnowFlake, body: RESTPatchAPIBlobDomainBody, options: RequestOptions = {}): Promise<APIBlobCustomDomain> =>
+			this.api("PATCH", `/domains/${enc(domainId)}`, { json: body, signal: options.signal, timeout: options.timeout }),
 		verify: (domainId: SnowFlake, options: RequestOptions = {}): Promise<APIBlobCustomDomain> => this.api("POST", `/domains/${enc(domainId)}/verify`, options),
 		remove: async (domainId: SnowFlake, options: RequestOptions = {}): Promise<void> => {
 			await this.api("DELETE", `/domains/${enc(domainId)}`, options);
