@@ -1,6 +1,6 @@
 {
 	"name": "@vertracloud/blob",
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"private": false,
 	"description": "Official JavaScript/TypeScript SDK for Vertra Cloud Blob Storage. Works in Node.js 18+, browsers and edge runtimes.",
 	"type": "module",
@@ -56,7 +56,7 @@
 		"check": "npm run typecheck && npm run lint && npm run test"
 	},
 	"dependencies": {
-		"@vertracloud/api-types": "file:../api-types"
+		"@vertracloud/api-types": "^0.4.0"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
