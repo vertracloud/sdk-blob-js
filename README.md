@@ -2,8 +2,6 @@
 
 Official JavaScript/TypeScript SDK for Vertra Cloud Blob Storage. Works in Node.js 18+, browsers and edge runtimes, using the native `fetch`.
 
-> **Status: under development, not published yet.** The API surface below may still change before the first release.
-
 Full documentation: <https://docs.vertracloud.app>
 
 ## Installation
