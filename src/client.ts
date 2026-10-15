@@ -561,8 +561,7 @@ export class BlobClient {
 			const { signal, timeout, prefix, web_content } = options;
 			return this.api("POST", "/domains", { json: { hostname, ...(prefix ? { prefix } : {}), ...(web_content === undefined ? {} : { web_content }) } satisfies RESTPostAPIBlobDomainBody, signal, timeout });
 		},
-		update: (domainId: SnowFlake, body: RESTPatchAPIBlobDomainBody, options: RequestOptions = {}): Promise<APIBlobCustomDomain> =>
-			this.api("PATCH", `/domains/${enc(domainId)}`, { json: body, signal: options.signal, timeout: options.timeout }),
+		update: (domainId: SnowFlake, body: RESTPatchAPIBlobDomainBody, options: RequestOptions = {}): Promise<APIBlobCustomDomain> => this.api("PATCH", `/domains/${enc(domainId)}`, { json: body, signal: options.signal, timeout: options.timeout }),
 		verify: (domainId: SnowFlake, options: RequestOptions = {}): Promise<APIBlobCustomDomain> => this.api("POST", `/domains/${enc(domainId)}/verify`, options),
 		remove: async (domainId: SnowFlake, options: RequestOptions = {}): Promise<void> => {
 			await this.api("DELETE", `/domains/${enc(domainId)}`, options);
