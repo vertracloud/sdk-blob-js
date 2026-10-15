@@ -88,6 +88,8 @@ export interface BlobWriteOptions {
 	overwrite?: boolean;
 	/** Insert `-<10 random characters>` before the extension. */
 	randomSuffix?: boolean;
+	/** When the path is taken, save as `name-1.ext`, `name-2.ext`, … instead of failing. The returned object has the final path. Not with `overwrite`. */
+	renameOnConflict?: boolean;
 	cacheControl?: string;
 	contentDisposition?: BlobContentDisposition;
 	/** File name suggested on download. */

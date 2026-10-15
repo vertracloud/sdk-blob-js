@@ -102,6 +102,13 @@ describe("put: simple upload", () => {
 		assert.deepEqual(progress.at(-1), { loaded: 5, total: 5 });
 	});
 
+	it("sends renameOnConflict as rename_on_conflict and returns the final path", async () => {
+		const { client, calls } = makeClient(() => ok(obj({ path: "docs/a-1.txt" }), 201));
+		const res = await client.put("docs/a.txt", "hello", { renameOnConflict: true });
+		assert.equal(res.path, "docs/a-1.txt");
+		assert.equal(calls[0].url.searchParams.get("rename_on_conflict"), "true");
+	});
+
 	it("accepts Blob, ArrayBuffer and Uint8Array, and a stream with size", async () => {
 		const { client, calls } = makeClient(() => ok(obj()));
 		await client.put("a.bin", new Blob(["abc"]));
