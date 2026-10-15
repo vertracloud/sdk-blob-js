@@ -142,6 +142,8 @@ export interface BlobUpdateChanges {
 export interface BlobCopyOptions extends RequestOptions {
 	overwrite?: boolean;
 	randomSuffix?: boolean;
+	/** Copy only: when the path is taken (even by the source), save as `name-1.ext`, `name-2.ext`, … instead of failing. Not with `overwrite`. */
+	renameOnConflict?: boolean;
 	visibility?: BlobVisibility;
 }
 

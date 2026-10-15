@@ -194,6 +194,12 @@ describe("objects", () => {
 		assert.deepEqual(calls[1].json, { source: "1", path: "img/a.txt", visibility: "public", move: true });
 	});
 
+	it("copy sends renameOnConflict as rename_on_conflict", async () => {
+		const { client, calls } = makeClient(() => ok(obj()));
+		await client.copy("1", "a.txt", { renameOnConflict: true });
+		assert.deepEqual(calls[0].json, { source: "1", path: "a.txt", rename_on_conflict: true });
+	});
+
 	it("delete accepts an empty success body", async () => {
 		const { client, calls } = makeClient(() => new Response(null, { status: 204 }));
 		await client.delete("5");
