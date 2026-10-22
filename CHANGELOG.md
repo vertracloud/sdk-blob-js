@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.4](https://github.com/vertracloud/sdk-blob-js/compare/v0.1.3...v0.1.4) (2026-10-22)
+
+
+### Bug Fixes
+
+* **deps:** bump @vertracloud/api-types to 0.5.0 ([a50d1ee](https://github.com/vertracloud/sdk-blob-js/commit/a50d1eefd4a442b498c88c9072a5d1279aae9f43))
+
 ## [0.1.3](https://github.com/vertracloud/sdk-blob-js/compare/v0.1.2...v0.1.3) (2026-10-18)
 
 
