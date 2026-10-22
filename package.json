@@ -1,6 +1,6 @@
 {
 	"name": "@vertracloud/blob",
-	"version": "0.1.3",
+	"version": "0.1.4",
 	"private": false,
 	"description": "Official JavaScript/TypeScript SDK for Vertra Cloud Blob Storage. Works in Node.js 18+, browsers and edge runtimes.",
 	"type": "module",
